@@ -1,0 +1,15 @@
+@value makerGrey from '../../common/colors.css';
+
+.loginForm {
+  width: 30rem;
+  background-color: makerGrey;
+}
+
+ul {
+  list-style: none;
+}
+
+.loginBtn {
+  width: 90%;
+  margin-bottom: 4px;
+}

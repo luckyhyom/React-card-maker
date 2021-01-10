@@ -1,0 +1,12 @@
+@value makerWheat from '../../common/colors.css';
+
+.editer {
+  background-color: makerWheat;
+  flex-basis: 50%;
+  background-color: makerLightPink;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
