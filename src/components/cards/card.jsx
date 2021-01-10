@@ -12,7 +12,6 @@ const url = fileURL || DEFAULT_URL;
 
 return (
     <div className={`${styles.cardBody} ${themes(theme)}`}>
-        <div>{card.name}</div>
         <section className={styles.photo}>
             <img src={`./images/${url}`} alt=""/>
         </section>

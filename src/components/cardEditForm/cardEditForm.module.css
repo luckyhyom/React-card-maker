@@ -1,0 +1,14 @@
+.editer {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.input {
+  flex: 1 1 30%;
+}
+
+.textarea {
+  flex-basis: 100%;
+}
