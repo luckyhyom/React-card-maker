@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import styles from './app.module.css';
 import Login from './components/login/login';
@@ -13,13 +12,13 @@ function App({authService}) {
     <Route exact path={['/',' ']}>
       <Login authService={authService} />
     </Route>
-  
     <Route exact path={'/maker'}>
       <Maker authService={authService} />
     </Route>
   </Switch>
   </BrowserRouter>
-  </div>);
+  </div>
+  );
 }
 
 export default App;

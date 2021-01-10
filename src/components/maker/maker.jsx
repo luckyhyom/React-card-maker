@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useCallback, useEffect,useState,memo } from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Header from '../header/header';
@@ -6,7 +6,7 @@ import styles from './maker.module.css';
 import Editer from '../editer/editer';
 import Preview from '../preview/preview';
 
-const Maker = ({authService}) => {
+const Maker = memo(({authService}) => {
 
     const [cards,setCards] = useState([
         {
@@ -59,17 +59,37 @@ const Maker = ({authService}) => {
         });
       });
 
+      const deleteCard = useCallback(
+        (card) => {
+          console.log(card);
+          // const test = cards.map(card1=>{
+          //   return card1.id !== card.id;
+          // });
+          // const cards = cards.filter(item=>item.id!==card.id);
+          // setCards(cards);
+        }
+
+        
+      )
+
+      const addCard = useCallback(
+        (card) => {
+          const update = [...cards,card];
+          setCards(update);
+        }
+      )
+      
 
     return (<section className={styles.maker}>
         <Header onLogout={onLogout} />
             <section className={styles.sectionBox}>
-                <Editer cards={cards}/>
+                <Editer cards={cards} onDelete={deleteCard} onAdd={addCard}/>
                 <Preview cards={cards}/>
             </section>
         <Footer/>
         </section>
     );
 
-};
+});
 
 export default Maker;

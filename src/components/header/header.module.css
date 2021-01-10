@@ -1,7 +1,6 @@
 @value makerBlack,makerWhite from '../../common/colors.css';
 
 .header {
-  width: 100%;
   background-color: mediumpurple;
   height: 60px;
   display: flex;
@@ -29,5 +28,5 @@
 }
 
 .fullSize {
-  width: 100%;
+  
 }

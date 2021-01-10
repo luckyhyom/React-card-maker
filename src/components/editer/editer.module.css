@@ -11,3 +11,9 @@
   justify-content: flex-start;
   padding: 20px;
 }
+
+.editerList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

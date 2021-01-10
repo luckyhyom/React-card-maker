@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 // 셋팅된 firebase
 
@@ -11,6 +11,7 @@ const firebaseConfig = {
     appId: `1:476590891348:web:8f6fc108e8138d09a5e8c1`,
     measurementId: `G-L31ZYG7PF9`,
   };
+
 
   const firebaseApp = firebase.initializeApp(firebaseConfig);
   export default firebaseApp;

@@ -60,5 +60,9 @@
 
 .underline {
   background-color: makerWhite;
-  height: 1px;
+  height: 2px;
+}
+
+.cardBody.light .underline {
+  background-color: black;
 }
