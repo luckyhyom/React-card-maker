@@ -10,6 +10,7 @@ const themeRef = useRef();
 const titleRef = useRef();
 const emailRef = useRef();
 const messageRef = useRef();
+const formRef = useRef();
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -31,11 +32,12 @@ const messageRef = useRef();
         // 자식은 바구니에 부모가 부탁한 물건을 담기만 하면 됨
         console.log(card);
         onAdd(card);
+        formRef.current.reset();
     };
 
 
     return (
-        <form className={styles.editer}>
+        <form ref={formRef} className={styles.editer}>
             <input ref={nameRef} className={styles.input} type="text" name="name" placeholder={"name"}/>
             <input ref={companyRef} className={styles.input} type="text" name="company" placeholder={"company"}/>
             <select ref={themeRef} className={styles.select} type="text" name="theme" placeholder={"theme"}>
@@ -47,7 +49,7 @@ const messageRef = useRef();
             <input ref={emailRef} className={styles.input} type="text" name="email" placeholder={"email"}/>
             <textarea ref={messageRef} className={styles.textarea} type="text" name="message" placeholder={"message"}/>
             <div className={styles.ImageFileInput}>
-                <ImageFileInput/>
+            <ImageFileInput/>
             </div>
             <Button name="Add" onClick={onSubmit} />
         </form>
