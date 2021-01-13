@@ -1,17 +1,18 @@
-import React,{useRef} from 'react';
+import React,{useRef, useState} from 'react';
 import styles from './cardAddForm.module.css';
 import Button from '../button/button';
-import ImageFileInput from '../imageFileInput/imageFileInput';
-const CardAddForm = ({onAdd}) => {
-
-const nameRef = useRef();
-const companyRef = useRef();
-const themeRef = useRef();
-const titleRef = useRef();
-const emailRef = useRef();
-const messageRef = useRef();
-const formRef = useRef();
-
+const CardAddForm = ({FileInput,onAdd}) => {
+    
+    const nameRef = useRef();
+    const companyRef = useRef();
+    const themeRef = useRef();
+    const titleRef = useRef();
+    const emailRef = useRef();
+    const messageRef = useRef();
+    const formRef = useRef();
+    
+    const [fileName,setFileName] = useState('');
+    const [fileURL,setFileURL] = useState('');
     const onSubmit = (event) => {
         event.preventDefault();
 
@@ -23,8 +24,8 @@ const formRef = useRef();
             title: titleRef.current.value||'',
             email: emailRef.current.value||'',
             message: messageRef.current.value||'',
-            fileName: '',
-            fileURL: null
+            fileName: fileName||'',
+            fileURL: fileURL||null
         }
 
         // 함수라 생각하지 말고 그냥 데이터 전달해주는 바구니라 생각해라..
@@ -35,6 +36,10 @@ const formRef = useRef();
         formRef.current.reset();
     };
 
+    const onFileChange = file =>{
+        setFileName(file.name);
+        setFileURL(file.url);
+    }
 
     return (
         <form ref={formRef} className={styles.editer}>
@@ -49,7 +54,7 @@ const formRef = useRef();
             <input ref={emailRef} className={styles.input} type="text" name="email" placeholder={"email"}/>
             <textarea ref={messageRef} className={styles.textarea} type="text" name="message" placeholder={"message"}/>
             <div className={styles.ImageFileInput}>
-            <ImageFileInput/>
+            <FileInput name={fileName} onFileChange={onFileChange} />
             </div>
             <Button name="Add" onClick={onSubmit} />
         </form>

@@ -6,7 +6,7 @@ import styles from './maker.module.css';
 import Editer from '../editer/editer';
 import Preview from '../preview/preview';
 
-const Maker = memo(({authService}) => {
+const Maker = memo(({FileInput,authService}) => {
 
   const [cards,setCards] = useState({
     1: {
@@ -17,7 +17,7 @@ const Maker = memo(({authService}) => {
       title: 'Software Engineer',
       email: 'gyals0386@gmail.com',
       message: 'go for it',
-      fileName: 'ellie',
+      fileName: '',
       fileURL: null
     },
     2: {
@@ -28,7 +28,7 @@ const Maker = memo(({authService}) => {
       title: 'Software Engineer',
       email: 'gyals0386@gmail.com',
       message: 'go for it',
-      fileName: 'ellie',
+      fileName: '',
       fileURL: null
     },
     3: {
@@ -39,8 +39,8 @@ const Maker = memo(({authService}) => {
       title: 'Software Engineer',
       email: 'gyals0386@gmail.com',
       message: 'go for it',
-      fileName: 'ellie',
-      fileURL: 'logo.png'
+      fileName: '',
+      fileURL: ''
     }
   });
 
@@ -152,7 +152,9 @@ const Maker = memo(({authService}) => {
         <Header onLogout={onLogout} />
             <section className={styles.sectionBox}>
                 <Editer cards={cards} onDelete={deleteCard} onAdd={addCard}
-                onUpdate={updateCard} />
+                onUpdate={updateCard}
+                FileInput={FileInput}
+                />
                 <Preview cards={cards}/>
             </section>
         <Footer/>

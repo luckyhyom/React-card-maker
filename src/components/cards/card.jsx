@@ -3,7 +3,7 @@ import styles from './card.module.css';
 
 const Card = ({card}) => {
 
-const DEFAULT_URL = 'default_logo.png';
+const DEFAULT_URL = './images/default_logo.png';
 
 const {id,name,company,theme,title,email,message,fileName,fileURL} = card;
 
@@ -13,7 +13,7 @@ const url = fileURL || DEFAULT_URL;
 return (
     <div className={`${styles.cardBody} ${themes(theme)}`}>
         <section className={styles.photo}>
-            <img src={`./images/${url}`} alt=""/>
+            <img src={`${url}`} alt=""/>
         </section>
         <section className={`${styles.info} `}>
             <input type="hidden" value={id}/>

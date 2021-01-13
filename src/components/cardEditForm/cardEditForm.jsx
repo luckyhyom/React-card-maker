@@ -1,8 +1,7 @@
 import React,{useRef} from 'react';
 import styles from './cardEditForm.module.css';
 import Button from '../button/button';
-import ImageFileInput from '../imageFileInput/imageFileInput';
-const CardEditForm = ({card,onDelete,onUpdate}) => {
+const CardEditForm = ({FileInput,card,onDelete,onUpdate}) => {
 
     const {name,company,theme,title,email,message,fileName,fileURL} = card;
 
@@ -36,7 +35,13 @@ const CardEditForm = ({card,onDelete,onUpdate}) => {
         //     ...card,
         //     [event.currentTarget.name]:event.currentTarget.value,
         // });
-        
+    }
+
+    const onFileChange = file =>{
+        // onUpdate() 함수를 만들어 놓으니까 뭔가 기능을 추가할때도 간단하네
+        card.fileName = file.name;
+        card.fileURL = file.url;
+        onUpdate(card);
     }
 
     return (
@@ -54,7 +59,7 @@ const CardEditForm = ({card,onDelete,onUpdate}) => {
             <input ref={emailRef} className={styles.input} type="text" name="email" defaultValue={email}/>
             <textarea ref={messageRef} className={styles.textarea} type="text" name="message" defaultValue={message}/>
             <div className={styles.ImageFileInput}>
-                <ImageFileInput/>
+                <FileInput name={fileName} onFileChange={onFileChange} />
             </div>
             <Button name="Delete" onClick={onDelete2} />
         </form>
