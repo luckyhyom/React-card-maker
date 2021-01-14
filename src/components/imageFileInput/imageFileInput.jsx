@@ -1,8 +1,11 @@
-import React,{useRef} from 'react';
+import React,{useRef, useState} from 'react';
 import styles from './imageFileInput.module.css';
-const ImageFileInput = ({imageUploader,name,onFileChange}) => {
+const ImageFileInput = ({imageUploader,name,onFileChange,url}) => {
 
     const inputRef = useRef();
+    // 로딩스피너를 위해서 boolean값을 활용한다.
+    const [loading,setLoading] = useState(false);
+    // const [file,setFile] = useState(false);
 
     const onButtonClick = event => {
         event.preventDefault();
@@ -10,9 +13,9 @@ const ImageFileInput = ({imageUploader,name,onFileChange}) => {
     }
 
     const onChange = async event => {
-        console.log(event.target.files[0]);
+        setLoading(true);
         const uploaded = await imageUploader.upload(event.target.files[0]);
-        console.log(uploaded);
+        setLoading(false);
         onFileChange({
             name: uploaded.original_filename,
             url: uploaded.url,
@@ -22,7 +25,12 @@ const ImageFileInput = ({imageUploader,name,onFileChange}) => {
     return (
      <div className={styles.container}>
          <input className={styles.input} ref={inputRef} type="file" onChange={onChange}  />
-    <button className={styles.button} onClick={onButtonClick} >{name||'No File'}</button>
+        {
+            !loading&&<button className={`${styles.button} ${url ? styles.full : styles}`} onClick={onButtonClick} >{name||'No File'}</button>
+        }
+        {
+            loading&&<div className={styles.loading}></div>
+        }
      </div>
     )
 }

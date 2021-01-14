@@ -34,6 +34,10 @@ const CardAddForm = ({FileInput,onAdd}) => {
         console.log(card);
         onAdd(card);
         formRef.current.reset();
+        onFileChange({
+            name: '',
+            url: '',
+        })
     };
 
     const onFileChange = file =>{
@@ -54,7 +58,7 @@ const CardAddForm = ({FileInput,onAdd}) => {
             <input ref={emailRef} className={styles.input} type="text" name="email" placeholder={"email"}/>
             <textarea ref={messageRef} className={styles.textarea} type="text" name="message" placeholder={"message"}/>
             <div className={styles.ImageFileInput}>
-            <FileInput name={fileName} onFileChange={onFileChange} />
+            <FileInput name={fileName} onFileChange={onFileChange} url={fileURL} />
             </div>
             <Button name="Add" onClick={onSubmit} />
         </form>

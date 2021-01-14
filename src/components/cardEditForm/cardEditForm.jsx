@@ -59,7 +59,7 @@ const CardEditForm = ({FileInput,card,onDelete,onUpdate}) => {
             <input ref={emailRef} className={styles.input} type="text" name="email" defaultValue={email}/>
             <textarea ref={messageRef} className={styles.textarea} type="text" name="message" defaultValue={message}/>
             <div className={styles.ImageFileInput}>
-                <FileInput name={fileName} onFileChange={onFileChange} />
+                <FileInput name={fileName||'default'} onFileChange={onFileChange} url={fileURL} />
             </div>
             <Button name="Delete" onClick={onDelete2} />
         </form>
