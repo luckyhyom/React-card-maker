@@ -11,6 +11,7 @@ const Login = ({authService}) => {
     const goToMaker = userId =>{
         history.push({
             pathname: '/maker',
+            // {}하나가 객체하나 .()으로 구별됨
             state: {id:userId}
         })
     }

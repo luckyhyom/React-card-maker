@@ -10,6 +10,7 @@ const firebaseConfig = {
     messagingSenderId: `476590891348`,
     appId: `1:476590891348:web:8f6fc108e8138d09a5e8c1`,
     measurementId: `G-L31ZYG7PF9`,
+    databaseURL: "https://business-card-maker-6cf93-default-rtdb.firebaseio.com",
   };
 
 

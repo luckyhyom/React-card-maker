@@ -6,44 +6,50 @@ import styles from './maker.module.css';
 import Editer from '../editer/editer';
 import Preview from '../preview/preview';
 
-const Maker = memo(({FileInput,authService}) => {
 
-  const [cards,setCards] = useState({
-    1: {
-      id:'1',
-      name: 'Hyomin',
-      company: 'Amazon',
-      theme: 'black',
-      title: 'Software Engineer',
-      email: 'gyals0386@gmail.com',
-      message: 'go for it',
-      fileName: '',
-      fileURL: null
-    },
-    2: {
-      id:'2',
-      name: 'Hyomin2',
-      company: 'Amazon',
-      theme: 'colorful',
-      title: 'Software Engineer',
-      email: 'gyals0386@gmail.com',
-      message: 'go for it',
-      fileName: '',
-      fileURL: null
-    },
-    3: {
-      id:'3',
-      name: 'Hyomin3',
-      company: 'Amazon',
-      theme: 'light',
-      title: 'Software Engineer',
-      email: 'gyals0386@gmail.com',
-      message: 'go for it',
-      fileName: '',
-      fileURL: ''
-    }
-  });
+const Maker = memo(({FileInput,authService,cardRepository}) => {
 
+  const historyState = useHistory().state;
+  const [userId,setUserId] = useState(`${historyState&&historyState.id}`);
+
+  const [cards,setCards] = useState({});
+
+     // 객체형태
+    // 1: {
+    //   id:'1',
+    //   name: 'Hyomin',
+    //   company: 'Amazon',
+    //   theme: 'black',
+    //   title: 'Software Engineer',
+    //   email: 'gyals0386@gmail.com',
+    //   message: 'go for it',
+    //   fileName: '',
+    //   fileURL: null
+    // },
+    // 2: {
+    //   id:'2',
+    //   name: 'Hyomin2',
+    //   company: 'Amazon',
+    //   theme: 'colorful',
+    //   title: 'Software Engineer',
+    //   email: 'gyals0386@gmail.com',
+    //   message: 'go for it',
+    //   fileName: '',
+    //   fileURL: null
+    // },
+    // 3: {
+    //   id:'3',
+    //   name: 'Hyomin3',
+    //   company: 'Amazon',
+    //   theme: 'light',
+    //   title: 'Software Engineer',
+    //   email: 'gyals0386@gmail.com',
+    //   message: 'go for it',
+    //   fileName: '',
+    //   fileURL: ''
+    // }
+
+    // 배열 일 때
     // const [cards,setCards] = useState([
     //     {
     //       id:'1',
@@ -89,7 +95,9 @@ const Maker = memo(({FileInput,authService}) => {
 
     useEffect(() => {
         authService.onAuthChange(user => {
-          if (!user) {
+          if (user) {
+            setUserId(user.uid);
+          }else{
             history.push('/');
           }
         });
@@ -101,6 +109,7 @@ const Maker = memo(({FileInput,authService}) => {
           const result = {...cards};
           delete result[card.id];
           setCards(result);
+          cardRepository.deleteCard(userId,card);
         }
 
         
@@ -108,8 +117,11 @@ const Maker = memo(({FileInput,authService}) => {
 
       const addCard = useCallback(
         (card) => {
+          // 데이터를 UI로 표현
           const update = {...cards,[card.id]:card};
           setCards(update);
+          // 데이터를 실제로 DB에 저장
+          cardRepository.addCard(userId,card);
         }
       )
 
