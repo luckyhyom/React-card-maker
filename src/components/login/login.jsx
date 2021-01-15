@@ -9,6 +9,9 @@ const Login = ({authService}) => {
     let history = useHistory();
 
     const goToMaker = userId =>{
+
+        console.log(`goTomaker : ${userId}`);
+
         history.push({
             pathname: '/maker',
             // {}하나가 객체하나 .()으로 구별됨
@@ -18,7 +21,10 @@ const Login = ({authService}) => {
 
     const onLogin = (event) =>{
         authService.login(event.currentTarget.textContent)
-            .then( data => goToMaker(data.user.uid)
+            .then( data => {
+                console.log(`onLogin to goToMaker : ${data.user.uid}}`);
+                goToMaker(data.user.uid||data.user.id);
+            }
         )
     }
 

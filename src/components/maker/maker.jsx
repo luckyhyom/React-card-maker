@@ -11,9 +11,7 @@ const Maker = memo(({FileInput,authService,cardRepository}) => {
 
   const historyState = useHistory().state;
   const [userId,setUserId] = useState(`${historyState&&historyState.id}`);
-  const [cards,setCards] = useState({
-
-  });
+  const [cards,setCards] = useState({1:{theme:'black'}});
 
     const history = useHistory();
 
@@ -30,6 +28,13 @@ const Maker = memo(({FileInput,authService,cardRepository}) => {
       //            -> 이미 안의 함수가 실행이 되고 return된 함수를 값으로 가지고 있다. ()=>ref.off
       //       만약 const stopSync = cardRepository.syncCard; 이렇게 정의하면
       //              stopSync(userId,(cards)=>{.....}) 이렇게 사용해줘야함.
+      console.log(cards);
+      // DB에 데이터가 없으면 에러가 난다. 샘플데이터를 넣어주자.
+      if(!cards){
+        cardRepository.saveCard(userId,cards[1]);
+      }
+      
+      // DB에 사용자 id가 없으면 에러생김 DB에 id부터 추가해주어야함.
       const stopSync = cardRepository.syncCard(userId,(cards)=>{setCards(cards)});
       return () => stopSync();
     },[cardRepository,userId]);
@@ -46,6 +51,7 @@ const Maker = memo(({FileInput,authService,cardRepository}) => {
 
       const deleteCard = 
         (card) => {
+          console.log(cards.length);
           // const result = cards.filter(item=>item.id!==card.id);
           const result = {...cards};
           delete result[card.id];
