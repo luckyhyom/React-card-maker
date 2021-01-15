@@ -29,7 +29,6 @@ const CardEditForm = ({FileInput,card,onDelete,onUpdate}) => {
         card.title = titleRef.current.value;
         card.email = emailRef.current.value;
         card.message = messageRef.current.value;
-        card.form = formRef.current.value;
         onUpdate(card);
         // onUpdate({
         //     ...card,

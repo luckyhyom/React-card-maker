@@ -1,4 +1,6 @@
 import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 // 셋팅된 firebase
 
@@ -15,4 +17,12 @@ const firebaseConfig = {
 
 
   const firebaseApp = firebase.initializeApp(firebaseConfig);
-  export default firebaseApp;
+  export const firebaseDatabase = firebaseApp.database();
+  export const firebaseAuth = firebaseApp.auth();
+  export const googleProvider = new firebase.auth.GoogleAuthProvider();
+  export const githubProvider = new firebase.auth.GithubAuthProvider();
+
+  // 회원가입은 어떻게 되는 걸까? 일단 firebaseApp은 내 apiKey로 실행이 된다.
+  // firebase설정에서 나의 google,github계정을 적어넣는데.. 이것만 가능하다는건지
+  // 아니면 이게 관리자 아이디라는건지 모르겠다.
+  // 등록하지 않은 계정도 가입이 되는건 뭘까?
