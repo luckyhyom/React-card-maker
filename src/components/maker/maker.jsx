@@ -33,7 +33,7 @@ const Maker = memo(({FileInput,authService,cardRepository}) => {
       if(!cards){
         cardRepository.saveCard(userId,cards[1]);
       }
-      
+      cardRepository.saveCard(userId,cards[1]);
       // DB에 사용자 id가 없으면 에러생김 DB에 id부터 추가해주어야함.
       const stopSync = cardRepository.syncCard(userId,(cards)=>{setCards(cards)});
       return () => stopSync();
